@@ -1,7 +1,7 @@
 object bombon {
     const property precio = 5
     var property peso = 15
-    const property sabor = "frutilla"
+    const property sabor = frutilla
     const property glutenfree = true
 
     method mordisco () {
@@ -12,7 +12,7 @@ object bombon {
 object alfajor {
     const property precio = 12
     var property peso = 300
-    const property sabor = "chocolate"
+    const property sabor = chocolate
     const property glutenfree = false
 
     method mordisco () {
@@ -23,7 +23,7 @@ object alfajor {
 object caramelo {
     const property precio = 1
     var property peso = 5
-    const property sabor = "frutilla"
+    const property sabor = frutilla
     const property glutenfree = true
 
     method mordisco () {
@@ -34,7 +34,7 @@ object caramelo {
 object chupetin {
     const property precio = 2
     var property peso = 7
-    const property sabor = "naranja"
+    const property sabor = naranja
     const property glutenfree = true
 
     method mordisco () {
@@ -47,7 +47,7 @@ object chupetin {
 object oblea {
     const property precio = 5
     var property peso = 250
-    const property sabor = "vainilla"
+    const property sabor = vainilla
     const property glutenfree = false
 
     method mordisco () {
@@ -60,12 +60,14 @@ object oblea {
 }
 
 object chocolatin {
-    var property peso = 0
+    var peso = 0
     const property glutenfree = false
-    const property sabor = "chocolate"
+    const property sabor = chocolate
     var property precio = 0
 
-    method pesar (_peso) {
+    method peso () = peso
+
+    method peso (_peso) {
         peso =  _peso
         precio = _peso * 0.5
     }
@@ -77,24 +79,44 @@ object chocolatin {
 
 object baniada {
     var property peso = 0
-    var property sabor = "naranja"
+    var property sabor = naranja
     var property precio = 0
     var property glutenfree = true
+    var property golosinaBaniada = bombon
+    var property i = 0
 
     method baniar (_golosina) {
+        golosinaBaniada = _golosina
         peso = _golosina.peso() + 4
         precio = _golosina.precio() + 2
         glutenfree = _golosina.glutenfree()
         sabor = _golosina.sabor()
+        i = 0
+    }
+
+    method mordisco() {
+        if (i < 2) {
+            peso = peso - 2
+            if(golosinaBaniada == pastilla){
+                golosinaBaniada.mordisco()
+                sabor = golosinaBaniada.sabor()
+                }
+        } else {
+            golosinaBaniada.mordisco()
+            peso = golosinaBaniada.peso()
+            sabor = golosinaBaniada.sabor()
+        }
+        i = i + 1
     }
 }
 
-object tuti {
+object pastilla {
     var property peso = 5
     var property glutenfree = true
     var property precio = 0
-    const sabores = ["frutilla", "chocolate", "naranja"]
-    var property sabor = "frutilla"
+    const property sabores = [frutilla, chocolate, naranja]
+    var property sabor = frutilla
+    var property i = 0
 
     method precio () {
         if (glutenfree) {
@@ -106,14 +128,23 @@ object tuti {
     }   
 
     method mordisco () {
-        if (sabores.size() == 0){
-            sabores.addAll(["frutilla", "chocolate", "naranja"])
+        sabor = sabores.get(i)
+        i = i+1
+        if (i > 2) {
+            i = 0
         }
-        sabor = sabores.first()
-        sabores.remove(sabor)
+        return sabor
     }
     
 }
+
+object frutilla {}
+
+object chocolate {}
+
+object naranja {}
+
+object vainilla {}
 
 object mariano {
     const property bolsa = []

@@ -1,1 +1,188 @@
+import golosinas.*
+test "Test de Golosinas" {
+    //bombon
+    assert.equals(15, bombon.peso())
+    assert.equals(5, bombon.precio())
+    assert.equals(frutilla, bombon.sabor())
+    assert.that(bombon.glutenfree())
 
+    //alfajor
+    assert.equals(300, alfajor.peso())
+    assert.equals(12, alfajor.precio())
+    assert.equals(chocolate, alfajor.sabor())
+    assert.notThat(alfajor.glutenfree())
+
+    //caramelo
+    assert.equals(5, caramelo.peso())
+    assert.equals(1, caramelo.precio())
+    assert.equals(frutilla, caramelo.sabor())
+    assert.that(caramelo.glutenfree())
+
+    //chupetin
+    assert.equals(7, chupetin.peso())
+    assert.equals(2, chupetin.precio())
+    assert.equals(naranja, chupetin.sabor())
+    assert.that(chupetin.glutenfree())
+
+    //oblea
+    assert.equals(250, oblea.peso())
+    assert.equals(5, oblea.precio())
+    assert.equals(vainilla, oblea.sabor())
+    assert.notThat(oblea.glutenfree())
+
+    //chocolatin
+    chocolatin.peso(40)
+    assert.equals(40, chocolatin.peso())
+    assert.equals(20, chocolatin.precio())
+    assert.equals(chocolate, chocolatin.sabor())
+    assert.notThat(chocolatin.glutenfree())
+
+    chocolatin.peso(100)
+    assert.equals(100, chocolatin.peso())
+    assert.equals(50, chocolatin.precio())
+    assert.equals(chocolate, chocolatin.sabor())
+    assert.notThat(chocolatin.glutenfree())
+
+    //tuti
+    assert.equals(5, pastilla.peso())
+    assert.equals(7, pastilla.precio())
+    assert.equals(frutilla, pastilla.sabor())
+    assert.that(pastilla.glutenfree())
+
+    pastilla.glutenfree(false)
+    assert.equals(5, pastilla.peso())
+    assert.equals(10, pastilla.precio())
+    assert.equals(frutilla, pastilla.sabor())
+    assert.notThat(pastilla.glutenfree())
+}
+
+test "Mordiscos" {
+    //bombon
+    bombon.mordisco()
+    bombon.mordisco()
+    assert.equals((((15 * 0.8) - 1) * 0.8) - 1, bombon.peso())
+    assert.equals(5, bombon.precio())
+    assert.equals(frutilla, bombon.sabor())
+    assert.that(bombon.glutenfree())
+
+    //alfajor
+    alfajor.mordisco()
+    alfajor.mordisco()
+    assert.equals((300 * 0.8) * 0.8, alfajor.peso())
+    assert.equals(12, alfajor.precio())
+    assert.equals(chocolate, alfajor.sabor())
+    assert.notThat(alfajor.glutenfree())
+
+    //caramelo
+    caramelo.mordisco()
+    caramelo.mordisco()
+    assert.equals(3, caramelo.peso())
+    assert.equals(1, caramelo.precio())
+    assert.equals(frutilla, caramelo.sabor())
+    assert.that(caramelo.glutenfree())
+
+    //chupetin
+    chupetin.mordisco()
+    chupetin.mordisco()
+    assert.equals((7 * 0.9) * 0.9, chupetin.peso())
+    assert.equals(2, chupetin.precio())
+    assert.equals(naranja, chupetin.sabor())
+    assert.that(chupetin.glutenfree())
+
+    //oblea
+    oblea.mordisco()
+    oblea.mordisco()
+    oblea.mordisco()
+    assert.equals(250 * 0.5 * 0.5 * 0.75, oblea.peso())
+    assert.equals(5, oblea.precio())
+    assert.equals(vainilla, oblea.sabor())
+    assert.notThat(oblea.glutenfree())
+
+    //chocolatin
+    chocolatin.peso(40)
+    chocolatin.mordisco()
+    chocolatin.mordisco()
+    assert.equals(36, chocolatin.peso())
+    assert.equals(20, chocolatin.precio())
+    assert.equals(chocolate, chocolatin.sabor())
+    assert.notThat(chocolatin.glutenfree())
+
+    chocolatin.peso(100)
+    chocolatin.mordisco()
+    chocolatin.mordisco()
+    assert.equals(96, chocolatin.peso())
+    assert.equals(50, chocolatin.precio())
+    assert.equals(chocolate, chocolatin.sabor())
+    assert.notThat(chocolatin.glutenfree())
+
+    //pastilla
+    pastilla.mordisco()
+    pastilla.mordisco()
+    assert.equals(5, pastilla.peso())
+    assert.equals(7, pastilla.precio())
+    assert.equals(chocolate, pastilla.sabor())
+    assert.that(pastilla.glutenfree())
+
+    pastilla.mordisco()
+    pastilla.mordisco()
+    pastilla.glutenfree(false)
+    assert.equals(5, pastilla.peso())
+    assert.equals(10, pastilla.precio())
+    assert.equals(frutilla, pastilla.sabor())
+    assert.notThat(pastilla.glutenfree())
+}
+
+test "Baniadas" {
+    //pastilla
+    baniada.baniar(pastilla)
+    assert.equals(9, baniada.peso())
+    assert.equals(9, baniada.precio())
+    assert.equals(frutilla, baniada.sabor())
+    assert.that(baniada.glutenfree())
+    pastilla.mordisco()
+    pastilla.mordisco()
+    assert.equals(5, pastilla.peso())
+    assert.equals(chocolate, pastilla.sabor())
+
+    pastilla.glutenfree(false) //con TACC
+    baniada.baniar(pastilla)
+    assert.equals(9, baniada.peso())
+    assert.equals(12, baniada.precio())
+    assert.equals(chocolate, baniada.sabor())
+    assert.notThat(baniada.glutenfree())
+    pastilla.mordisco()
+    pastilla.mordisco()
+    assert.equals(5, pastilla.peso())
+    assert.equals(frutilla, pastilla.sabor())
+
+    //chocolatin
+    chocolatin.peso(40)
+    baniada.baniar(chocolatin)
+    
+    assert.equals(44, baniada.peso())
+    assert.equals(22, baniada.precio())
+    assert.equals(chocolate, baniada.sabor())
+    assert.notThat(baniada.glutenfree())
+
+    chocolatin.mordisco()
+    chocolatin.mordisco()
+    assert.equals(44, baniada.peso())
+    assert.equals(22, baniada.precio())
+    assert.equals(chocolate, baniada.sabor())
+    assert.notThat(baniada.glutenfree())
+
+
+    chocolatin.peso(100)
+    baniada.baniar(chocolatin)
+    assert.equals(104, baniada.peso())
+    assert.equals(52, baniada.precio())
+    assert.equals(chocolate, baniada.sabor())
+    assert.notThat(baniada.glutenfree())
+    
+    chocolatin.mordisco()
+    chocolatin.mordisco()
+    assert.equals(104, baniada.peso())
+    assert.equals(52, baniada.precio())
+    assert.equals(chocolate, baniada.sabor())
+    assert.notThat(baniada.glutenfree())
+}
